@@ -1,0 +1,55 @@
+flutter , android studio 설치 
+
+facebook 로그인
+1.https://developers.facebook.com/docs/facebook-login/android
+이동
+
+2. 새앱 만들기
+
+3. android/app/src/main/AndroidManifest.xml
+의 패키지 네임입력 
+
+4.android/build.gradle의
+buildscript{repositories{}}안에 mavenCentral()추가
+
+5.android/app/src/build.gradle의
+dependencies{}안에
+implementation 'com.facebook.android:facebook-android-sdk:[8,1)' 추가 없어도 돌아감
+
+6.openssl 설치 https://code.google.com/archive/p/openssl-for-windows/downloads)
+압축풀어서 openssl\bin환경변수 설정
+
+7.cd C:\Program Files\Android\Android Studio\jre\bin 이동
+
+8.keytool -exportcert -alias androiddebugkey -keystore %HOMEPATH%/.android/debug.keystore | openssl sha1 -binary | openssl base64
+입력하여 해시키를 불러옴
+
+9.android/app/src/res/values/strings.xml을만들어추가
+<string name="app_name">flutter_foreign</string>
+<string name="facebook_app_id">4120451211317229</string>
+<string name="fb_login_protocol_scheme">fb4120451211317229</string>
+추가
+
+(아래 코드는 이미추가되어있음)
+<uses-permission android:name="android.permission.INTERNET"/>
+
+10.android/app/src/main/AndroidManifest.xml안에
+<meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/> <activity android:name="com.facebook.FacebookActivity" android:configChanges= "keyboard|keyboardHidden|screenLayout|screenSize|orientation" android:label="@string/app_name" /> <activity android:name="com.facebook.CustomTabActivity" android:exported="true"> <intent-filter> <action android:name="android.intent.action.VIEW" /> <category android:name="android.intent.category.DEFAULT" /> <category android:name="android.intent.category.BROWSABLE" /> <data android:scheme="@string/fb_login_protocol_scheme" /> </intent-filter> </activity>
+추가
+
+11.패키지 다운받고 코드넣어서 실행
+
+구글로그인
+1.https://console.cloud.google.com/ 접속
+
+2.프로젝트생성
+
+3.oauth동의화면
+외부, 이메일과 패키지명
+
+4.oauth 추가 
+
+5.sha-1인증서 가져오는법
+"C:\Program Files\Android\Android Studio\jre\bin\keytool" -list -v -keystore "%USERPROFILE%\.android\debug.keystore" -alias androiddebugkey -storepass android -keypass android
+
+6.패키지 등록 후 코드넣어서실행
